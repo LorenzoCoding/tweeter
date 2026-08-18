@@ -1,0 +1,20 @@
+name: OWASP Security Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  semgrep:
+    name: Scan for OWASP Vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep OWASP Ruleset
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: p/owasp-top-10
